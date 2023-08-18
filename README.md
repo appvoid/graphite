@@ -68,7 +68,9 @@ The ui class provides a concise and minimal way to handle common UI-related meth
 - #### log(msg, clear = false): Log a message to the console with optional clearing.
   - msg (string): The message to log.
   - clear (boolean, optional): Clear the console before logging.
-  - styling methods for changing element appearance: foreground, background, font, size, pointer, select, padding, radius, and color.
+
+- #### styling methods for changing element appearance: foreground, background, font, size, pointer, select, padding, radius, and color.
+
 - #### popup(message): Display a temporary popup notification on the screen.
   - message (string, optional): The message to be displayed in the popup. Defaults to "This is a notification."
   - Returns: An automatically executed function that can be used as reference for the popup.
