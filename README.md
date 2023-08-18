@@ -1,4 +1,5 @@
 # graphite
+![logo of graphite](https://raw.githubusercontent.com/appvoid/graphite/main/graphite-black.png)
 ## About
 Graphite is an effort to make better alternatives to current frameworks using an easily customizable and minimalist design. Thought from the ground up to be easy to use for people coming from a machine learning background or artists alike. It's the main tool I'm using from now on all my javascript projects. Alpha stage but a joy to play with and modify. It's like a tiny version of JQuery but without all of the mess, just the basics to get you started quickly. You can in fact use a mix of graphite with javascript when needed or try to go all the way up with javascript and use its convenient methods when needed. This is one step forward into making myself and others able to play with javascript without all the naming and management hassle that comes with being a web developer. Just a way to make the path a little bit easier.
 
