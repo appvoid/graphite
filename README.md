@@ -6,11 +6,10 @@ Graphite is an effort to make better alternatives to current frameworks using an
 ## Features
 - [x] Minimal approach
 - [x] Listeners and timers management (no need to manually free memory)
-- [x] Give gradient colors to backgrounds or text right from code
+- [x] Gradient colors to backgrounds/texts directly from code
 - [x] Human-readable timers
-- [x] A pretty good-looking popup
+- [x] Custom made popup
 - [x] Shortcuts support
-- [ ] A lot more features coming soon...
 
 ## Documentation
 
