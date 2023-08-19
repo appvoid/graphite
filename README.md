@@ -156,3 +156,7 @@ db.delete("username");
 // Unsubscribe from data changes
 db.unsubscribe("username", myCallback);
 ```
+
+
+## Note
+Some features may not be completed or have limitations. For example, you cannot currently set fonts and backgrounds with gradients at the same time for an element. Other features are not fully tested yet. They were proven to work but not all cases are covered. db class is still alpha, do expect bugs.
