@@ -1,6 +1,3 @@
-// ui.js
-// This is where most of the magic happens
-
 class ui {
   // Minimal UI
   // This library handles common UI related methods in a concise and minimal way
@@ -166,7 +163,58 @@ class ui {
 
     return togglePopUp(message);
   }
+  
+   static shortcut(keyCombo, callback) {
+    const keys = keyCombo.toLowerCase().split('+').map(key => key.trim());
+    
+    document.addEventListener('keydown', (event) => {
+      const pressedKeys = keys.map(key => {
+        if (key === 'ctrl') {
+          return event.ctrlKey;
+        } else if (key === 'shift') {
+          return event.shiftKey;
+        } else if (key === 'alt') {
+          return event.altKey;
+        } else {
+          return event.key.toLowerCase() === key;
+        }
+      });
+      
+      if (pressedKeys.every(key => key)) {
+        callback(event);
+      }
+    });
+  }
+  
+  static shortcut(keyCombo, callback) {
+    document.onkeyup = function (e) {
+      const keys = keyCombo.toLowerCase().split('+').map(key => key.trim());
 
+      const pressedKeys = {
+        ctrl: e.ctrlKey,
+        alt: e.altKey,
+        shift: e.shiftKey,
+        key: e.key.toLowerCase()
+      };
+
+      const allKeysPressed = keys.every(key => {
+        if (key === 'ctrl') {
+          return pressedKeys.ctrl;
+        } else if (key === 'alt') {
+          return pressedKeys.alt;
+        } else if (key === 'shift') {
+          return pressedKeys.shift;
+        } else {
+          return pressedKeys.key === key;
+        }
+      });
+
+      if (allKeysPressed) {
+        callback(e);
+      }
+    };
+  }
+  
   // Styles
   static convert6DigitsHexToColorWithOpacity(hexColor, opacity) {
     // Extend shorthand hex to full hex
@@ -278,7 +326,7 @@ class ui {
   // Run a callback when the DOM is fully loaded
   static loaded(callback) {
     if (document.readyState === "loading") {
-      this.listen(document, "DOMContentLoaded", callback)
+      this.listen(document, "DOMContentLoaded", callback);
     } else {
       callback();
     }
