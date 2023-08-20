@@ -73,7 +73,14 @@ The ui class provides a concise and minimal way to handle common UI-related meth
 
 - #### popup(message): Display a temporary popup notification on the screen.
   - message (string, optional): The message to be displayed in the popup. Defaults to "This is a notification."
-  - Returns: An automatically executed function that can be used as reference for the popup.
+  - Optional Customization Options (options parameter):
+    - position (string, optional): The position of the popup on the screen. Can be "center" (default) or "top".
+    - backgroundColor (string, optional): The background color of the popup. Default is "#222".
+    - textColor (string, optional): The text color of the popup. Default is "white".
+    - borderColor (string, optional): The border color of the popup. Default is "#333".
+    - displayTime (number, optional): The duration in seconds for which the popup is displayed. Default is (4 seconds).
+  - Returns: An automatically executed function that can be used as a reference for the popup.
+
 
 - #### loaded(callback): Execute a callback function when the DOM is fully loaded.
   - callback (function): The function to execute when the DOM is ready.
