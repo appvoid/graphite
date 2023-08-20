@@ -129,12 +129,13 @@ class ui {
 
   // Logs a message to screen
   static popup(message = "This is a notification.", options = {}) {
+    let _this = this // global access to the main module
     const {
       position = "center", // Default position
       backgroundColor = "#222", // Default background color
       textColor = "white", // Default text color
       borderColor = "#333", // Default border color
-      displayTime = 4000, // Default display time in milliseconds
+      displayTime = 4, // Default display time in seconds
     } = options;
 
     const style = document.createElement("style");
@@ -162,10 +163,11 @@ class ui {
       if (popup.style.display === "none") {
         popup.style.display = "block";
         popup.style.transform = "translate(-50%, -50%) translateY(0)";
-        setTimeout(() => {
+        // we use "_this" because the "this" is a reference for function togglePopUp
+        _this.wait(4, () => { 
           popup.style.display = "none";
           popup.style.transform = "translate(-50%, -50%) translateY(16px)";
-        }, displayTime);
+        });
       }
     }
 
