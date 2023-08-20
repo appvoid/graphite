@@ -96,10 +96,19 @@ ui.listen(buttonElement, "click", () => {
 // Create a new div element with class and text
 const newDiv = ui.create("div", { classes: ["box"], text: "Hello, world!" });
 
-// Remove a DOM element
+// Set gradient color to text
+ui.color(newDiv, '#333', '#555', true)
+
+// Set background color to element
+ui.color(p, '#333')
+
+// Set color to element
+ui.color(p, '#333', null, true) // Todo: make it less verbose
+
+// Remove a DOM element. It also automagically removes listeners!
 ui.remove(newDiv);
 
-// Wait for 2 seconds and then execute a callback
+// Wait for 2 seconds and then execute a callback. Don't need to handle setTimeout!
 ui.wait(2, () => {
   ui.popup("Waited 2 seconds!");
 });
@@ -111,10 +120,13 @@ ui.start();
 const header = ui.get("header");
 
 // Log a message and clear console
-ui.log("Logged message", true);
+ui.log("Hello, world", true);
 
-// Set foreground color
+// Set foreground color for whole page
 ui.foreground("red");
+
+// Set background color for whole page
+ui.background("black");
 ```
 
 ### Class db
