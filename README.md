@@ -10,6 +10,7 @@ Graphite is an effort to make better alternatives to current frameworks using an
 - [x] Human-readable timers
 - [x] Custom made popup
 - [x] Shortcuts support
+- [x] localStorage Database
 
 ## Documentation
 
@@ -118,7 +119,7 @@ ui.foreground("red");
 
 ### Class db
 #### Description
-The db class provides a minimal subscription-based localStorage database. It allows easy data storage and automatic synchronization with UI components when data changes.
+The db class provides a minimal subscription-based localStorage database. It allows easy data storage and automatic synchronization with UI components when data changes. Think of it as simple replacement for React auto-updating, perfect for prototypes or small-medium sized apps.
 
 #### Properties
 - subscriptions: An object that stores data change subscribers.
