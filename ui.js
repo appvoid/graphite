@@ -128,27 +128,35 @@ class ui {
   }
 
   // Logs a message to screen
-  static popup(message = "This is a notification.") {
+  static popup(message = "This is a notification.", options = {}) {
+    const {
+      position = "center", // Default position
+      backgroundColor = "#222", // Default background color
+      textColor = "white", // Default text color
+      borderColor = "#333", // Default border color
+      displayTime = 4000, // Default display time in milliseconds
+    } = options;
+
     const style = document.createElement("style");
 
     const popup = document.createElement("div");
     popup.id = "popup";
     popup.style.position = "fixed";
-    popup.style.top = "8%";
+    popup.style.top = position === "top" ? "8%" : "50%"; // Adjust top position based on 'position' option
     popup.style.left = "50%";
     popup.style.width = "16vw";
     popup.style.borderRadius = "0.75rem";
     popup.style.padding = "1rem";
-    popup.style.color = "white";
-    popup.style.backgroundColor = "#222";
-    popup.style.border = "3px solid #333";
+    popup.style.color = textColor;
+    popup.style.backgroundColor = backgroundColor;
+    popup.style.border = `3px solid ${borderColor}`;
     popup.style.transition = "transform 0.2s ease-out";
     popup.style.transform = "translate(-50%, -50%) translateY(16px)";
     popup.style.display = "none";
 
     document.body.appendChild(popup);
 
-    function togglePopUp(msg = "This is a notification.") {
+    function togglePopUp(msg = message) {
       popup.innerText = msg;
 
       if (popup.style.display === "none") {
@@ -157,12 +165,13 @@ class ui {
         setTimeout(() => {
           popup.style.display = "none";
           popup.style.transform = "translate(-50%, -50%) translateY(16px)";
-        }, 4000);
+        }, displayTime);
       }
     }
 
-    return togglePopUp(message);
+    return togglePopUp();
   }
+
   
    static shortcut(keyCombo, callback) {
     const keys = keyCombo.toLowerCase().split('+').map(key => key.trim());
@@ -329,6 +338,57 @@ class ui {
       this.listen(document, "DOMContentLoaded", callback);
     } else {
       callback();
+    }
+  }
+}
+
+class db {
+  // Minimal Subscription
+  // This is a localStorage database that makes it easy to save data
+  // It also automatically synchronises UI when data changes
+
+  static subscriptions = {};
+
+  static clear() {
+    localStorage.clear();
+  }
+
+  static set(key, value) {
+    // Save data and trigger update callback
+    localStorage.setItem(key, JSON.stringify(value));
+    this.triggerSubscribers(key, value);
+  }
+
+  static get(key, defaultValue = null) {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : defaultValue;
+  }
+
+  static delete(key) {
+    localStorage.removeItem(key);
+    this.triggerSubscribers(key, null);
+  }
+
+  static subscribe(key, callback) {
+    if (!this.subscriptions[key]) {
+      this.subscriptions[key] = [];
+    }
+    this.subscriptions[key].push(callback);
+  }
+
+  static unsubscribe(key, callback) {
+    const subscribers = this.subscriptions[key];
+    if (subscribers) {
+      this.subscriptions[key] = subscribers.filter((cb) => cb !== callback);
+    }
+  }
+
+  static triggerSubscribers(key, value) {
+    const subscribers = this.subscriptions[key];
+    if (subscribers) {
+      subscribers.forEach((callback) => {
+        callback(value);
+      });
     }
   }
 }
