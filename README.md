@@ -22,6 +22,14 @@ This is one step forward into making myself and others able to play with javascr
 - [ ] Drag 'n Drop elements
 - [ ] Add an optional argument for a pseudo animation "pushing down" feedback for the pointer method.
 
+## Core parts
+```
+// time         (timeouts and intervals)
+// events       (automatic memory handling)
+// interaction  (drag 'n drop, clock, popup)
+// appereance   (gradients, colors, sizes, fonts)
+```
+
 ## Documentation
 
 ### Class ui
