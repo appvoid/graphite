@@ -19,6 +19,7 @@ This is one step forward into making myself and others able to play with javascr
 ## Roadmap
 - [ ] Interval management and human-readable set
 - [ ] Realtime clock using interval management
+- [ ] Drag 'n Drop elements
 - [ ] Add an optional argument for a pseudo animation "pushing down" feedback for the pointer method.
 
 ## Documentation
