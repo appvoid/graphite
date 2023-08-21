@@ -12,6 +12,11 @@ Graphite is an effort to make better alternatives to current frameworks using an
 - [x] Shortcuts support
 - [x] localStorage Database
 
+## Roadmap
+- [ ] Interval management and human-readable set
+- [ ] Realtime clock using interval management
+- [ ] Add an optional argument for a pseudo animation "pushing down" feedback for the pointer method.
+
 ## Documentation
 
 ### Class ui
