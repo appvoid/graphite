@@ -1,18 +1,25 @@
 class db {
-  // Minimal Subscription
-  // This is a localStorage database that makes it easy to save data
-  // It also automatically synchronises UI when data changes
-
   static subscriptions = {};
 
   static clear() {
     localStorage.clear();
   }
 
+  static isFirstTime() {
+    const isFirstTime = !localStorage.getItem('app_loaded_before');
+    if (isFirstTime) {
+      localStorage.setItem('app_loaded_before', 'true');
+    }
+    return isFirstTime;
+  }
+
+  static resetFirstTime() {
+    localStorage.removeItem('app_loaded_before');
+  }
+
   static set(key, value) {
-    // Save data and trigger update callback
     localStorage.setItem(key, JSON.stringify(value));
-    this.triggerSubscribers(key, value);
+    this.trigger(key, value);
   }
 
   static get(key, defaultValue = null) {
@@ -22,28 +29,37 @@ class db {
 
   static delete(key) {
     localStorage.removeItem(key);
-    this.triggerSubscribers(key, null);
+    this.trigger(key, null);
   }
 
-  static subscribe(key, callback) {
+  static subscribe(key, elementsToUpdate, callback) {
     if (!this.subscriptions[key]) {
       this.subscriptions[key] = [];
     }
-    this.subscriptions[key].push(callback);
+
+    // Store the elements to update along with the callback
+    this.subscriptions[key].push({ elementsToUpdate, callback });
   }
 
   static unsubscribe(key, callback) {
     const subscribers = this.subscriptions[key];
     if (subscribers) {
-      this.subscriptions[key] = subscribers.filter((cb) => cb !== callback);
+      this.subscriptions[key] = subscribers.filter(
+        (subscriber) => subscriber.callback !== callback
+      );
     }
   }
 
-  static triggerSubscribers(key, value) {
+  static trigger(key, value) {
     const subscribers = this.subscriptions[key];
     if (subscribers) {
-      subscribers.forEach((callback) => {
-        callback(value);
+      subscribers.forEach((subscriber) => {
+        const { elementsToUpdate, callback } = subscriber;
+
+        // Call the callback for each element to update
+        elementsToUpdate.forEach((element) => {
+          callback(element, value);
+        });
       });
     }
   }
